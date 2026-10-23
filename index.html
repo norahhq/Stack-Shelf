@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>stackshelf</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Crect width='10' height='10' fill='black'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- sign in -->
+<section id="auth" hidden>
+  <form id="authform" autocomplete="on">
+    <div class="logo"><i></i>stackshelf</div>
+    <p class="mut" id="tag">a quiet place to log what you learn from.</p>
+    <input id="u" placeholder="username" autocomplete="username" required>
+    <input id="p" type="password" placeholder="password" autocomplete="current-password" required>
+    <div class="err" id="err"></div>
+    <button class="btn solid" id="go">sign in</button>
+    <button type="button" class="link" id="swap">new here? create an account</button>
+  </form>
+</section>
+
+<!-- app -->
+<div id="app" hidden>
+  <header>
+    <div class="wrap bar">
+      <div class="logo"><i></i>stackshelf</div>
+      <nav>
+        <button class="link on" data-view="shelf">shelf</button>
+        <button class="link" data-view="popular">popular</button>
+      </nav>
+      <div class="right">
+        <span class="mut" id="me"></span>
+        <button class="link" id="theme">theme</button>
+        <button class="link" id="out">sign out</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section id="v-shelf">
+      <div class="hero">
+        <h1>your shelf</h1>
+        <div class="mut" id="stats"></div>
+      </div>
+      <div class="filters" id="filters"></div>
+      <div class="grid" id="grid"></div>
+    </section>
+
+    <section id="v-popular" hidden>
+      <div class="hero">
+        <h1>popular</h1>
+        <div class="mut">what people are learning from, ranked by how many shelves it sits on.</div>
+      </div>
+      <div class="filters" id="pfilters"></div>
+      <div id="plist"></div>
+      <p class="mut small" id="pnote"></p>
+    </section>
+  </main>
+
+  <footer class="wrap">
+    <span class="mut">stackshelf</span>
+    <span>
+      <button class="link" id="addbtn">+ log a resource</button>
+      <button class="link" id="exp">export</button>
+      <button class="link" id="imp">import</button>
+    </span>
+  </footer>
+</div>
+
+<!-- add / edit -->
+<div class="modal" id="modal">
+  <div class="sheet">
+    <div>
+      <div class="cover" id="pv"></div>
+    </div>
+    <div>
+      <h2 id="mt">log a resource</h2>
+      <label>url</label><input id="f_url" placeholder="https://">
+      <label>title</label><input id="f_title" placeholder="what is it called">
+      <div class="row">
+        <div><label>domain</label><input id="f_dom" list="doms" placeholder="machine learning"><datalist id="doms"></datalist></div>
+        <div><label>type</label><select id="f_type"></select></div>
+      </div>
+      <div class="row">
+        <div><label>status</label>
+          <select id="f_status"><option value="learning">learning</option><option value="done">finished</option><option value="want">want to</option></select></div>
+        <div><label>rating</label><div class="rate" id="f_rate"></div></div>
+      </div>
+      <label>cover <span class="mut">(image url or isbn, optional)</span></label>
+      <div class="row"><input id="f_cover" placeholder="9780262035613"><button type="button" class="btn" id="covbtn">upload</button></div>
+      <input type="file" id="covfile" accept="image/*" hidden>
+      <label>notes</label><textarea id="f_note" placeholder="what did you take away?"></textarea>
+      <div class="foot">
+        <button class="btn solid" id="save">save</button>
+        <button class="btn" id="cancel">cancel</button>
+        <span class="sp"></span>
+        <button class="link" id="open">open ↗</button>
+        <button class="link" id="del">delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+<input type="file" id="impfile" accept="application/json" hidden>
+
+<script src="app.js"></script>
+</body>
+</html>
